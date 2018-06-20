@@ -63,6 +63,17 @@ const randomJoke = () => {
     yoMommaJoke();
   }
 };
+//Show help text
+const runHelp = () => {
+  const params = {
+    icon_emoji: ':question:'
+  };
+  bot.postMessageToChannel(
+    'general',
+    `Type @jokebot with either 'chucknorris', 'yomama' or 'random' to get a joke`,
+    params
+  );
+};
 //Error handler
 bot.on('error', err => {
   console.log(e);
