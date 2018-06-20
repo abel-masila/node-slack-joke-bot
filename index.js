@@ -31,6 +31,8 @@ bot.on('message', res => {
 const handleMessage = msg => {
   if (msg.includes(' chucknorris')) {
     chuckJoke();
+  } else if (msg.includes(' yomama')) {
+    yoMommaJoke();
   }
 };
 
@@ -43,5 +45,15 @@ const chuckJoke = () => {
       icon_emoji: ':laughing:'
     };
     bot.postMessageToChannel('general', `Chuck Norris: ${joke}`, params);
+  });
+};
+//Tell a Yo Momma Joke
+const yoMommaJoke = () => {
+  axios.get('http://api.yomomma.info').then(res => {
+    const joke = res.data.joke;
+    const params = {
+      icon_emoji: ':laughing:'
+    };
+    bot.postMessageToChannel('general', `Yo Momma: ${joke}`, params);
   });
 };
