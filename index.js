@@ -5,7 +5,6 @@ const bot = new SlackBot({
   token: 'xoxb-79953380449-384639174131-WpftIaXceC32OsXUCUM2z2xD',
   name: 'Joke Bot'
 });
-
 //Create start handler
 bot.on('start', () => {
   const params = {
@@ -17,11 +16,6 @@ bot.on('start', () => {
     params
   );
 });
-//Error handler
-bot.on('error', err => {
-  console.log(e);
-});
-
 //Message Handler
 bot.on('message', res => {
   if (res.type !== 'message') return;
@@ -33,9 +27,12 @@ const handleMessage = msg => {
     chuckJoke();
   } else if (msg.includes(' yomama')) {
     yoMommaJoke();
+  } else if (msg.includes(' random')) {
+    randomJoke();
+  } else if (msg.includes(' help')) {
+    runHelp();
   }
 };
-
 //Tell a Chuck Norris Joke
 const chuckJoke = () => {
   //Make xhr request
@@ -57,3 +54,16 @@ const yoMommaJoke = () => {
     bot.postMessageToChannel('general', `Yo Momma: ${joke}`, params);
   });
 };
+//Tell a random joke
+const randomJoke = () => {
+  const rand = Math.floor(Math.random() * 2) + 1;
+  if (rand === 1) {
+    chuckJoke();
+  } else if (rand === 2) {
+    yoMommaJoke();
+  }
+};
+//Error handler
+bot.on('error', err => {
+  console.log(e);
+});
